@@ -11,7 +11,7 @@
 #include "c_sqlite.h"
 
 //Time betweens readings in seconds
-#define LOG_INTERVAL    60
+#define LOG_INTERVAL    10
 
 int KEEP_RUNNING;
 int zExitCode;

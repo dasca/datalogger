@@ -82,8 +82,8 @@ int addReading(struct sOneWireDevice *devicePtr) {
     char *zErrMsg = 0;
     int rc, sensorID = 0;
     char sqlString[100];
-    sprintf(sqlString, "SELECT * FROM sensors WHERE adress='%s'", 
-devicePtr->adress);
+
+    sprintf(sqlString, "SELECT * FROM sensors WHERE adress='%s'", devicePtr->adress);
     rc = sqlite3_exec(db, sqlString, deviceFindCallback, &sensorID, &zErrMsg);
 
 
@@ -118,7 +118,7 @@ devicePtr->adress);
         log_entry(log_buf, LOG_NO_EXIT);
         return(0);
     }
-    
+    log_entry(sqlString, LOG_NO_EXIT);
     //sensorID = sqlite3_last_insert_rowid(db);
     sqlite3_close(db);
     return(1);

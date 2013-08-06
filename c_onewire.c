@@ -27,7 +27,6 @@ struct sOneWireDevice *list_devices() {
     struct sOneWireDevice *sRetVal = NULL;
     struct sOneWireDevice *sDevice = NULL;
 
-
     pDirHandle = opendir(oneWirePath);
 
     if (pDirHandle == NULL) {
@@ -102,6 +101,7 @@ struct sOneWireDevice *list_devices() {
     sDevice = sDevice->next;
     sDevice->adress = strdup("000000000000002");
     sDevice->type = strdup("KWH");
+    sDevice->next = NULL;
 
     return sRetVal;
 }
@@ -147,8 +147,7 @@ struct sOneWireDevice *updateValue(struct sOneWireDevice *device) {
         device->value = i / 1000.0;
 
         if (!valid) {
-            sprintf(log_buf, "CRC Error on device %s, value=%4.2f", 
-device->adress, device->value);
+            sprintf(log_buf, "CRC Error on device %s, value=%4.2f", device->adress, device->value);
             log_entry(log_buf, LOG_NO_EXIT);
             device = NULL;
         }
