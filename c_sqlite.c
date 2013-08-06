@@ -118,8 +118,8 @@ int addReading(struct sOneWireDevice *devicePtr) {
         log_entry(log_buf, LOG_NO_EXIT);
         return(0);
     }
-    log_entry(sqlString, LOG_NO_EXIT);
-    //sensorID = sqlite3_last_insert_rowid(db);
+    sprintf(log_buf, "%s: %4.2f", devicePtr->adress, devicePtr->value);
+    log_entry(log_buf, LOG_NO_EXIT);
     sqlite3_close(db);
     return(1);
 }
